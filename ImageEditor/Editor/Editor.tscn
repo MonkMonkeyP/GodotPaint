@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Editor/editor.gd" type="Script" id=2]
+[ext_resource path="res://Editor/Icons/icon_bucket.png" type="Texture" id=3]
+[ext_resource path="res://Editor/Icons/icon_pencil.png" type="Texture" id=4]
+[ext_resource path="res://Editor/Scripts/tool_pencil.gd" type="Script" id=5]
+[ext_resource path="res://Editor/Scripts/tool_bucket.gd" type="Script" id=6]
+
+[node name="Editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BucketFill" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Pencil" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Line" type="Node" parent="."]
+
+[node name="ImageDisplay" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -308.0
+margin_bottom = 438.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorPicker" type="ColorPicker" parent="VBoxContainer"]
+margin_right = 308.0
+margin_bottom = 438.0
+edit_alpha = false
+hsv_mode = true
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 442.0
+margin_right = 308.0
+margin_bottom = 514.0
+columns = 4
+
+[node name="ButtonPencil" type="ToolButton" parent="VBoxContainer/GridContainer"]
+margin_right = 76.0
+margin_bottom = 72.0
+icon = ExtResource( 4 )
+flat = false
+
+[node name="ButtonBucket" type="ToolButton" parent="VBoxContainer/GridContainer"]
+margin_left = 80.0
+margin_right = 156.0
+margin_bottom = 72.0
+icon = ExtResource( 3 )
+flat = false
+[connection signal="color_changed" from="VBoxContainer/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/ButtonPencil" to="." method="_on_ButtonPencil_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/ButtonBucket" to="." method="_on_ButtonBucket_pressed"]
